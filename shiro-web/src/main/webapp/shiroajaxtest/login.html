@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/bootstrap.js"></script>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                    <input type="text" class="form-control" id="logusername" placeholder="账号" aria-describedby="sizing-addon1">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                    <input type="password" class="form-control" id="logpwd" placeholder="密码" aria-describedby="sizing-addon1">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <button type="button" class="btn btn-info btn-lg btn-block" id="loginbtn">登录</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+
+            $("#loginbtn").click(function () {
+//                alert("222");
+                var username = $("#logusername").val();
+                var password = $("#logpwd").val();
+//                alert(username + "=" + password);
+//                $.post("http://localhost:8080/ajaxlogin",{"username":username,"password":username},function (data) {
+//                    alert(data);
+//                })
+//
+                $.ajax({
+                    url: "http://localhost:8080/ajaxlogin",
+                    type: 'POST',
+                    data: '{"username":username,"password":username}',
+                    dataType: 'html',
+                    async: true,
+                    success: function (data) {
+                        alert("==" + data)
+                        $("#page").html(data);
+                    },
+                    //有以下三个参数：XMLHttpRequest 对象、错误信息、（可选）捕获的异常对象
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        //认证失败
+                        console.log(jqXHR.data);
+                        console.log(jqXHR.toString());
+                        console.log(jqXHR.error);
+                        console.log(jqXHR.status);
+                        console.log("textStatus:" + textStatus + ",errorThrown:" + errorThrown)
+                        if(jqXHR.status == 401){
+                            alert('认证失败...');
+                            console.log('认证失败...');
+//                            window.location.reload(true);//刷新当前页
+                        }
+                    }
+
+                });
+
+
+            });
+
+        });
+    </script>
+
+</body>
+</html>
