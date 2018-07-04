@@ -26,7 +26,10 @@ public class UserController {
     @RequestMapping(value = "/subLogin" ,method = RequestMethod.POST,
     produces = "application/json;charset=utf-8")
     @ResponseBody
-    public String subLogin(UserSheet userSheet){
+    public String subLogin(UserSheet userSheet,HttpServletRequest request){
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        System.out.println("=====" + username + "==" + password);
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(userSheet.getUsername(),userSheet.getPassword());
 
@@ -57,6 +60,9 @@ public class UserController {
         return username + "==" + password;
     }
 
+//    public String ajaxResult(){
+//
+//    }
 
     /**
      * 注解授权demo

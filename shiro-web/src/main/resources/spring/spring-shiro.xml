@@ -37,7 +37,7 @@
         <property name="filterChainDefinitions"><!--过滤器链-->
             <!--anon 不需要认证  authc 需要认证  不需要验证的写在上面，因为从上往下执行，/* = authc会拦截所有，放最上面会全部要求验证-->
             <value>
-
+                /hello = anon
                 /login.html = anon
                 /subLogin = anon
                 /* = authc

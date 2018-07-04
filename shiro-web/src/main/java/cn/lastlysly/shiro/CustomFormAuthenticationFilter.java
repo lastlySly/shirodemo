@@ -1,5 +1,6 @@
 package cn.lastlysly.shiro;
 
+import cn.lastlysly.controller.AjaxUtilsTest;
 import cn.lastlysly.myutils.MyUtils;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.util.WebUtils;
@@ -40,6 +41,7 @@ public class CustomFormAuthenticationFilter extends FormAuthenticationFilter{
 //                httpServletResponse.sendError(401);
 //                httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);//401
                 httpServletResponse.setContentType("text/html;charset=utf-8");
+//                httpServletResponse.sendRedirect("/login.html");
                 httpServletResponse.getWriter().write("这是自定义ajax shiro拦截，发送自定义输出，");
                 return false;
 
